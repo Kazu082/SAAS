@@ -1,0 +1,49 @@
+a {
+  text-decoration: none;
+}
+
+@mixin arrowStyle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%);
+  font-weight: normal;
+}
+
+@mixin buttonStyle($direction: "left", $arrowMargin: 20px) {
+  width: 200px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+@if $direction == "left" {
+  &::before {
+    @include arrowStyle;
+    content: "<";
+    left: $arrowMargin;
+  } @else if $direction == "right" {
+    &::after {
+      @include arrowStyle;
+      content: ">";
+      right: $arrowMargin;
+    }
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.button {
+  @include buttonStyle;
+}
+
+.button2 {
+  @include buttonStyle("right");
+}
